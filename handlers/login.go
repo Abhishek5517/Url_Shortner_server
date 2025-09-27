@@ -74,7 +74,10 @@ func Login() fiber.Handler {
 
 		pass, err := authenticateUser(user)
 		if err != nil {
-			return handleInvalidation(c)
+			return c.Status(401).JSON(fiber.Map{
+				"success": false,
+				"message": "invalid credentials",
+			})
 		}
 		if pass != "" {
 
