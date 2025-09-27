@@ -25,9 +25,11 @@ It includes **JWT-based authentication**, **PostgreSQL** for persistent storage,
 
 ---
 
-## sample .env file
+## Environment Variables
 
-DB_URL = postgres://postgres:Password@localhost:5432/shortUrlDB?sslmode=disable 
-SERVER_PORT = 8080 
-SECRET_KEY = secret_key
-REDIS_URL = localhost:6379
+```env
+DB_URL=postgres://postgres:Password@localhost:5432/shortUrlDB?sslmode=disable
+SERVER_PORT=8080
+SECRET_KEY=secret_key
+REDIS_URL=localhost:6379
+
