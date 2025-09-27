@@ -1,6 +1,6 @@
 # Go-Fiber URL Shortener
 
-A production-ready **URL shortener service** built with [Go Fiber](https://gofiber.io/).  
+ReLink a **URL shortener service** built with [Go Fiber](https://gofiber.io/).  
 It includes **JWT-based authentication**, **PostgreSQL** for persistent storage, and a **Redis-powered hit counter** (via Pub/Sub) to track live URL hits in real time.
 
 ---
