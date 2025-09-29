@@ -12,23 +12,22 @@ import (
 	"urlShortner/handlers/createUrl"
 	redirectUrl "urlShortner/handlers/redirect"
 
-	"github.com/go-redis/redis/v8"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 )
 
-var rdb = redis.NewClient(&redis.Options{
-	Addr: "localhost:6379",
-})
+// var opt, _ = redis.ParseURL(os.Getenv("REDIS_URL"))
+// var rdb = redis.NewClient(opt)
 
 func main() {
 
 	err := godotenv.Load()
-
 	if err != nil {
 		panic(err)
 	}
+
+	redis := database.ConnectRedis()
 
 	dbURL := os.Getenv("DB_URL")
 	port := os.Getenv("SERVER_PORT")
@@ -66,7 +65,7 @@ func main() {
 	app.Get("/events", func(c *fiber.Ctx) error {
 		c.Set("Content-Type", "text/event-stream")
 
-		pubsub := rdb.Subscribe(context.Background(), "hits_channel")
+		pubsub := redis.Subscribe(context.Background(), "hits_channel")
 		ch := pubsub.Channel()
 
 		c.Context().SetBodyStreamWriter(func(w *bufio.Writer) {

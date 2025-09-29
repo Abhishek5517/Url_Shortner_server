@@ -2,6 +2,7 @@ package createUrl
 
 import (
 	"fmt"
+	"os"
 	"urlShortner/models"
 
 	"github.com/gofiber/fiber/v2"
@@ -33,8 +34,8 @@ func CreateUrl() fiber.Handler {
 		if err != nil {
 			return fmt.Errorf("db issues")
 		}
-
-		shortLink := "http://localhost:8888/" + key
+		serverUrl := os.Getenv("SERVER_URL")
+		shortLink := serverUrl + key
 
 		return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 			"success":  true,
