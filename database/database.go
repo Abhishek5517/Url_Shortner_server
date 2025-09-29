@@ -3,6 +3,7 @@ package database
 import (
 	"context"
 	"log"
+	"net"
 	"time"
 
 	"github.com/jackc/pgx/v5/pgxpool"
@@ -19,6 +20,10 @@ func ConnectDB(dbURL string) {
 
 	if err != nil {
 		log.Fatal("unable to parse config", err)
+	}
+
+	config.ConnConfig.DialFunc = func(ctx context.Context, network, addr string) (net.Conn, error) {
+		return net.DialTimeout("tcp4", addr, 5*time.Second)
 	}
 
 	config.MaxConns = 10
