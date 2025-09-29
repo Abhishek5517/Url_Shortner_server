@@ -34,6 +34,7 @@ func main() {
 	}
 
 	database.ConnectDB(dbURL)
+
 	app := fiber.New(fiber.Config{
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
 

@@ -32,7 +32,7 @@ func ConnectDB(dbURL string) {
 
 	err = DB.Ping(ctx)
 	if err != nil {
-		log.Fatal("error connecting to database")
+		log.Fatalf("error connecting to database: %v", err)
 	}
 	log.Println("connected to database!!!")
 }
