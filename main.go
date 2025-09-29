@@ -29,6 +29,10 @@ func main() {
 	dbURL := os.Getenv("DB_URL")
 	port := os.Getenv("SERVER_PORT")
 
+	if dbURL == "" {
+		log.Fatal("DATABASE_URL not set")
+	}
+
 	database.ConnectDB(dbURL)
 	app := fiber.New(fiber.Config{
 		ErrorHandler: func(c *fiber.Ctx, err error) error {
